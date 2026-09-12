@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raihan's Birthday 🎂</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Poppins", Arial, sans-serif;
+    background: #090b18;
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.screen {
+    min-height: 100vh;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 25px;
+    position: relative;
+}
+
+.screen.active {
+    display: flex;
+}
+
+.container {
+    width: 100%;
+    max-width: 650px;
+    z-index: 2;
+}
+
+h1 {
+    font-size: clamp(35px, 10vw, 65px);
+    margin-bottom: 15px;
+}
+
+h2 {
+    font-size: clamp(25px, 7vw, 42px);
+    margin-bottom: 18px;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #d9d9e8;
+}
+
+.gradient {
+    background: linear-gradient(90deg, #ff7eb3, #b58cff, #72d8ff);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+button {
+    border: none;
+    outline: none;
+    padding: 15px 27px;
+    border-radius: 50px;
+    margin-top: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    background: white;
+    color: #151525;
+    box-shadow: 0 10px 30px rgba(255,255,255,.15);
+    transition: .25s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(.95);
+}
+
+/* Stars */
+.star {
+    position: fixed;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    opacity: .7;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: .2; }
+    to { opacity: 1; }
+}
+
+/* Screen 1 */
+.intro {
+    background:
+        radial-gradient(circle at top, #24234b 0%, #090b18 55%);
+}
+
+.small {
+    font-size: 14px;
+    color: #aaaac2;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.gift {
+    font-size: 85px;
+    animation: float 2s ease-in-out infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+/* Screen 2 */
+.reveal {
+    background: linear-gradient(135deg, #16152e, #271933);
+}
+
+.card {
+    padding: 30px 23px;
+    border-radius: 25px;
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.12);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 70px rgba(0,0,0,.35);
+}
+
+.emoji {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.roast {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 18px;
+    background: rgba(255,255,255,.06);
+    color: #e8e8f2;
+}
+
+.roast span {
+    color: #ff91bd;
+    font-weight: bold;
+}
+
+/* Screen 3 */
+.memory {
+    background: radial-gradient(circle, #20203c, #090b18);
+}
+
+.reasons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 13px;
+    margin-top: 25px;
+}
+
+.reason {
+    padding: 18px 10px;
+    border-radius: 18px;
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.1);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.reason b {
+    display: block;
+    font-size: 24px;
+    margin-bottom: 7px;
+}
+
+/* Screen 4 */
+.message {
+    background: linear-gradient(160deg, #111329, #24152d);
+}
+
+.letter {
+    text-align: left;
+    padding: 28px 23px;
+    border-radius: 24px;
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.12);
+}
+
+.letter p {
+    margin-bottom: 15px;
+}
+
+.signature {
+    text-align: right;
+    color: #ff9bc2;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* Cake */
+.cake {
+    font-size: 85px;
+    animation: cakePop 1s ease;
+}
+
+@keyframes cakePop {
+    0% { transform: scale(0); }
+    80% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+/* Confetti */
+.confetti {
+    position: fixed;
+    top: -15px;
+    width: 9px;
+    height: 15px;
+    z-index: 10;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+    }
+}
+
+/* Final */
+.final {
+    background: radial-gradient(circle at center, #29234b, #090b18);
+}
+
+.finalText {
+    font-size: clamp(18px, 5vw, 27px);
+    line-height: 1.7;
+    margin-top: 20px;
+}
+
+.age {
+    font-size: 14px;
+    color: #aaaac2;
+    margin-top: 20px;
+}
+
+@media(max-width: 480px) {
+    .reasons {
+        grid-template-columns: 1fr;
+    }
+
+    .card, .letter {
+        padding: 23px 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- STARS -->
+<script>
+for(let i = 0; i < 70; i++){
+    const star = document.createElement("div");
+    star.className = "star";
+    star.style.left = Math.random()*100 + "vw";
+    star.style.top = Math.random()*100 + "vh";
+    star.style.animationDelay = Math.random()*2 + "s";
+    document.body.appendChild(star);
+}
+</script>
+
+
+<!-- SCREEN 1 -->
+<section class="screen active intro" id="screen1">
+    <div class="container">
+
+        <div class="small">A very important notification...</div>
+
+        <div class="gift">🎁</div>
+
+        <h1>
+            Hey <span class="gradient">Raihan</span>...
+        </h1>
+
+        <p>
+            Someone's birthday is today.<br>
+            Unfortunately, that someone is you. 😭
+        </p>
+
+        <button onclick="nextScreen(2)">
+            Open Your Surprise 🎁
+        </button>
+
+    </div>
+</section>
+
+
+<!-- SCREEN 2 -->
+<section class="screen reveal" id="screen2">
+    <div class="container">
+
+        <div class="card">
+
+            <div class="emoji">🎂✨</div>
+
+            <h2>
+                Happy Birthday,
+                <span class="gradient">Raihan!</span>
+            </h2>
+
+            <p>
+                Congratulations! 🎉<br>
+                You have successfully completed another
+                year of being unnecessarily handsome,
+                slightly dramatic, and occasionally too flirty. 😂
+            </p>
+
+            <div class="roast">
+                <span>System Report 🖥️</span>
+                <br><br>
+
+                Gym obsession: <b>100%</b> 🏋️<br>
+                Handsome level: <b>unfortunately high</b> 😭<br>
+                Flirting: <b>Needs monitoring</b> 👀<br>
+                Drama: <b>Unlimited storage</b> 😂<br>
+                Friendship: <b>10/10</b> 🤍
+            </div>
+
+            <button onclick="nextScreen(3)">
+                Okay okay... continue 😭
+            </button>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- SCREEN 3 -->
+<section class="screen memory" id="screen3">
+    <div class="container">
+
+        <h2>
+            Why you're actually a
+            <span class="gradient">good friend 🤍</span>
+        </h2>
+
+        <p>
+            Jokes apart, here's the part where I stop roasting you
+            for approximately 30 seconds.
+        </p>
+
+        <div class="reasons">
+
+            <div class="reason">
+                <b>😂</b>
+                You somehow make even normal conversations chaotic.
+            </div>
+
+            <div class="reason">
+                <b>🫶</b>
+                You're genuinely a good person to have around.
+            </div>
+
+            <div class="reason">
+                <b>🌍</b>
+                Distance doesn't make a friendship any less real.
+            </div>
+
+            <div class="reason">
+                <b>🏋️</b>
+                Keep chasing your goals... just don't forget to rest too.
+            </div>
+
+            <div class="reason">
+                <b>😭</b>
+                Your dramatic moments are annoying...
+                but somehow entertaining.
+            </div>
+
+            <div class="reason">
+                <b>🤍</b>
+                I'm genuinely glad we became friends.
+            </div>
+
+        </div>
+
+        <button onclick="nextScreen(4)">
+            One last thing...
+        </button>
+
+    </div>
+</section>
+
+
+<!-- SCREEN 4 -->
+<section class="screen message" id="screen4">
+    <div class="container">
+
+        <div class="letter">
+
+            <h2>
+                A little message for you 💌
+            </h2>
+
+            <p>
+                Honestly, I don't make a huge number of friends,
+                so when I genuinely consider someone a good friend,
+                it means something to me.
+            </p>
+
+            <p>
+                And I'm really glad that I got to know you.
+                You're one of those people who can turn a completely
+                normal conversation into something I'll remember. 😂
+            </p>
+
+            <p>
+                I hope this year brings you happiness, success,
+                peace, good people, and obviously...
+                enough time for your beloved gym. 🏋️😂
+            </p>
+
+            <p>
+                Keep being yourself, keep working for what you want,
+                and don't let the difficult days make you forget
+                how far you've already come.
+            </p>
+
+            <p>
+                And yes, I'll continue tolerating your drama...
+                because apparently that's part of the friendship package. 😭😂
+            </p>
+
+            <div class="signature">
+                Happy Birthday, Raihan 🤍<br>
+                Stay blessed & stay happy ✨
+            </div>
+
+        </div>
+
+        <button onclick="finalScreen()">
+            🎂 Make a Wish
+        </button>
+
+    </div>
+</section>
+
+
+<!-- FINAL SCREEN -->
+<section class="screen final" id="screen5">
+    <div class="container">
+
+        <div class="cake">🎂</div>
+
+        <h1>
+            Happy Birthday
+            <span class="gradient">Raihan!</span> 🎉
+        </h1>
+
+        <div class="finalText">
+            May your life always have<br>
+            more reasons to smile than to worry. 🤍
+        </div>
+
+        <div class="age">
+            Birthday.exe has successfully completed 🎉
+        </div>
+
+        <button onclick="restart()">
+            Replay 🔄
+        </button>
+
+    </div>
+</section>
+
+
+<script>
+
+function nextScreen(number) {
+
+    document.querySelectorAll(".screen").forEach(screen => {
+        screen.classList.remove("active");
+    });
+
+    document.getElementById("screen" + number).classList.add("active");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+    if(number === 2) {
+        setTimeout(confetti, 300);
+    }
+}
+
+
+function finalScreen() {
+
+    document.querySelectorAll(".screen").forEach(screen => {
+        screen.classList.remove("active");
+    });
+
+    document.getElementById("screen5").classList.add("active");
+
+    confetti();
+    confetti();
+}
+
+
+function restart() {
+
+    document.querySelectorAll(".screen").forEach(screen => {
+        screen.classList.remove("active");
+    });
+
+    document.getElementById("screen1").classList.add("active");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+function confetti() {
+
+    const symbols = ["🎉","✨","💖","🎊","⭐","💫"];
+
+    for(let i = 0; i < 80; i++) {
+
+        const piece = document.createElement("div");
+
+        piece.className = "confetti";
+
+        piece.innerHTML =
+            symbols[Math.floor(Math.random()*symbols.length)];
+
+        piece.style.left = Math.random()*100 + "vw";
+
+        piece.style.animationDuration =
+            (2 + Math.random()*3) + "s";
+
+        piece.style.fontSize =
+            (12 + Math.random()*18) + "px";
+
+        document.body.appendChild(piece);
+
+        setTimeout(() => {
+            piece.remove();
+        }, 5500);
+    }
+}
+
+</script>
+
+</body>
+</html>
